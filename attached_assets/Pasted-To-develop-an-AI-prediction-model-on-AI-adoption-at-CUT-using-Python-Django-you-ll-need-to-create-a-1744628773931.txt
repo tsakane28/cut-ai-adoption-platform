@@ -1,0 +1,136 @@
+To develop an AI prediction model on AI adoption at CUT using Python Django, you'll need to create a web application that allows users to upload data, train the model, and visualize the results on a dashboard. Additionally, you'll integrate an OpenRouter API key to enhance functionality, such as providing suggestions from the output and improving the app's features. Below is a structured prompt to guide you through this development process:
+
+---
+
+### Prompt for Developing an AI Prediction Model on AI Adoption at CUT Using Python Django
+
+#### Objective:
+Create a Django web application that allows users to upload data, train an AI prediction model, and visualize the results on a dashboard. The application should also integrate an OpenRouter API key to enhance functionality, such as providing suggestions from the output and improving the app's features.
+
+#### Steps:
+
+1. **Set Up Django Project:**
+   - Create a new Django project and application.
+   - Configure the project settings, including database configuration and static files handling.
+
+2. **Data Upload Functionality:**
+   - Create a Django form to allow users to upload CSV files containing data for training the model.
+   - Implement a view to handle the file upload and save the data to the database.
+
+3. **Model Training:**
+   - Develop a machine learning model using a suitable library (e.g., scikit-learn, TensorFlow) to predict AI adoption at CUT.
+   - Create a Django view to train the model using the uploaded data.
+   - Save the trained model to a file or database for future use.
+
+4. **Dashboard for Visualization:**
+   - Design a dashboard using Django templates to display the results of the model training.
+   - Include visualizations such as graphs and charts to represent the model's predictions and performance metrics.
+
+5. **Integrate OpenRouter API:**
+   - Obtain an OpenRouter API key and configure it in your Django settings.
+   - Use the OpenRouter API to enhance the application's functionality, such as providing suggestions based on the model's output.
+   - Implement API calls in your Django views to fetch and display suggestions.
+
+6. **Continuous Training:**
+   - Develop functionality to retrain the model with new data uploaded by users.
+   - Update the dashboard to reflect the latest model training results.
+
+7. **User Interface Enhancements:**
+   - Improve the user interface to make it intuitive and user-friendly.
+   - Add features such as user authentication, error handling, and notifications.
+
+8. **Testing and Deployment:**
+   - Write unit tests and integration tests to ensure the application works as expected.
+   - Deploy the Django application to a production server (e.g., Heroku, AWS, DigitalOcean).
+
+#### Example Code Snippets:
+
+**1. Setting Up Django Project:**
+```bash
+django-admin startproject ai_adoption_predictor
+cd ai_adoption_predictor
+python manage.py startapp prediction
+```
+
+**2. Data Upload Form (forms.py):**
+```python
+from django import forms
+
+class DataUploadForm(forms.Form):
+    file = forms.FileField()
+```
+
+**3. View to Handle File Upload (views.py):**
+```python
+from django.shortcuts import render, redirect
+from .forms import DataUploadForm
+import pandas as pd
+
+def upload_data(request):
+    if request.method == 'POST':
+        form = DataUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            data = pd.read_csv(file)
+            # Save data to the database or process it
+            return redirect('success')
+    else:
+        form = DataUploadForm()
+    return render(request, 'upload.html', {'form': form})
+```
+
+**4. Model Training View (views.py):**
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import joblib
+
+def train_model(request):
+    # Load data from the database
+    data = pd.read_csv('path_to_data.csv')
+    X = data.drop('target', axis=1)
+    y = data['target']
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+
+    # Save the trained model
+    joblib.dump(model, 'model.pkl')
+
+    return render(request, 'dashboard.html', {'accuracy': model.score(X_test, y_test)})
+```
+
+**5. Integrate OpenRouter API (views.py):**
+```python
+import requests
+from django.conf import settings
+
+def get_suggestions(output):
+    api_key = settings.OPENROUTER_API_KEY
+    url = 'https://api.openrouter.ai/suggestions'
+    headers = {'Authorization': f'Bearer {api_key}'}
+    response = requests.post(url, json={'output': output}, headers=headers)
+    suggestions = response.json()
+    return suggestions
+```
+
+**6. Dashboard Template (dashboard.html):**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Adoption Prediction Dashboard</title>
+</head>
+<body>
+    <h1>AI Adoption Prediction Dashboard</h1>
+    <p>Model Accuracy: {{ accuracy }}</p>
+    <div id="visualizations">
+        <!-- Add visualizations here -->
+    </div>
+</body>
+</html>
+```
+
+#### Conclusion:
+By following these steps, you will create a robust Django web application that allows users to upload data, train an AI prediction model, and visualize the results on a dashboard. Integrating the OpenRouter API will enhance the application's functionality, making it more useful and interactive.

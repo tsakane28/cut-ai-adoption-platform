@@ -8,7 +8,7 @@ from loggers import get_logger
 logger = get_logger("openrouter_api")
 
 # Default OpenRouter configuration
-DEFAULT_API_KEY = "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"
+DEFAULT_API_KEY = None
 DEFAULT_MODEL_ID = "deepseek/deepseek-r1-distill-qwen-32b:free"
 DEFAULT_MODEL_NAME = "DeepSeek R1 Distill Qwen 32B"
 
@@ -24,7 +24,7 @@ def get_api_key():
     
     if not api_key:
         logger.warning("OpenRouter API key not found in environment variables")
-        st.warning("OpenRouter API key not found in environment variables. Using mock data for demonstration.")
+        st.error("OpenRouter API key not configured. Please set the OPENROUTER_API_KEY environment variable in Replit Secrets.")
         return None
     
     logger.info("Successfully loaded OpenRouter API key")

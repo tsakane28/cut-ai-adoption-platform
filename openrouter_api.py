@@ -2,6 +2,15 @@ import os
 import requests
 import json
 import streamlit as st
+from loggers import get_logger
+
+# Set up logger
+logger = get_logger("openrouter_api")
+
+# Default OpenRouter configuration
+DEFAULT_API_KEY = "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"
+DEFAULT_MODEL_ID = "deepseek/deepseek-r1-distill-qwen-32b:free"
+DEFAULT_MODEL_NAME = "DeepSeek R1 Distill Qwen 32B"
 
 def get_api_key():
     """
@@ -10,15 +19,36 @@ def get_api_key():
     Returns:
         str: API key or None if not found
     """
-    # Try to get from environment variables or use a demo key (for development only)
-    api_key = os.getenv("OPENROUTER_API_KEY")
+    # Try to get from environment variables
+    api_key = os.getenv("OPENROUTER_API_KEY", DEFAULT_API_KEY)
     
-    # For demonstration purposes - in production, this should be removed
     if not api_key:
+        logger.warning("OpenRouter API key not found in environment variables")
         st.warning("OpenRouter API key not found in environment variables. Using mock data for demonstration.")
         return None
     
+    logger.info("Successfully loaded OpenRouter API key")
     return api_key
+
+def get_model_id():
+    """
+    Get the OpenRouter model ID from environment variables
+    
+    Returns:
+        str: Model ID or default model if not found
+    """
+    model_id = os.getenv("OPENROUTER_MODEL_ID", DEFAULT_MODEL_ID)
+    logger.info(f"Using OpenRouter model ID: {model_id}")
+    return model_id
+
+def get_model_name():
+    """
+    Get the OpenRouter model name from environment variables
+    
+    Returns:
+        str: Model name or default model name if not found
+    """
+    return os.getenv("OPENROUTER_MODEL_NAME", DEFAULT_MODEL_NAME)
 
 def get_ai_insights(prompt):
     """
@@ -31,10 +61,14 @@ def get_ai_insights(prompt):
         str: Generated insights
     """
     api_key = get_api_key()
+    model_id = get_model_id()
     
     # If no API key is available, return mock insights
     if not api_key:
+        logger.warning("No API key available, using mock insights")
         return generate_mock_insights()
+    
+    logger.info(f"Using OpenRouter API with model: {model_id}")
     
     # OpenRouter API endpoint
     url = "https://openrouter.ai/api/v1/chat/completions"
@@ -43,12 +77,18 @@ def get_ai_insights(prompt):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
+        "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",  # Replace with your site URL
+        "X-Title": "CUT AI Adoption Analytics Platform"
     }
     
     # Request body
     data = {
-        "model": "anthropic/claude-3-opus:beta",  # Can be adjusted based on needs
+        "model": model_id,
         "messages": [
+            {
+                "role": "system",
+                "content": "You are an AI analytics expert specializing in educational technology adoption and data analysis."
+            },
             {
                 "role": "user",
                 "content": prompt

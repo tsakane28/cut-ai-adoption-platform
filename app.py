@@ -3,9 +3,13 @@ import pandas as pd
 import numpy as np
 import os
 import uuid
+from dotenv import load_dotenv
 from utils import preprocess_data, get_survey_stats
 from model import train_model, predict_adoption
-from openrouter_api import get_ai_insights
+from openrouter_api import get_ai_insights, get_api_key, get_model_id, get_model_name
+
+# Load environment variables from .env file
+load_dotenv()
 from data_viz import (
     create_ai_familiarity_chart, 
     create_tool_usage_chart, 
@@ -58,7 +62,7 @@ with st.sidebar:
     
     page = st.radio(
         "Go to",
-        ["Data Upload", "Dashboard", "AI Predictions", "Insights & Suggestions"]
+        ["Data Upload", "Dashboard", "AI Predictions", "Insights & Suggestions", "Admin"]
     )
     
     st.header("About")
@@ -369,3 +373,94 @@ elif page == "Insights & Suggestions":
                     st.info("CSV export functionality would be implemented here.")
         else:
             st.error("Failed to generate proper insights format. Please try again.")
+
+# Admin Page
+elif page == "Admin":
+    st.header("Administrator Settings")
+    
+    # API Configuration
+    st.subheader("OpenRouter API Configuration")
+    
+    # Get API configuration
+    api_key = get_api_key()
+    model_id = get_model_id()
+    model_name = get_model_name()
+    
+    # Format the API key for display (hide most of it)
+    if api_key:
+        # Show only first 8 and last 4 characters
+        displayed_key = f"{api_key[:8]}...{api_key[-4:]}"
+    else:
+        displayed_key = "Not configured"
+    
+    # Display configuration
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.info(f"**API Key**: {displayed_key}")
+        st.info(f"**Model ID**: {model_id}")
+    
+    with col2:
+        st.info(f"**Model Name**: {model_name}")
+        test_status = "Connected" if api_key else "Not Connected"
+        st.info(f"**Status**: {test_status}")
+    
+    # Database Configuration
+    st.subheader("Database Configuration")
+    
+    # Display database connection info
+    database_url = os.getenv("DATABASE_URL", "Not configured")
+    
+    # If DATABASE_URL exists, mask the password
+    if database_url and "@" in database_url:
+        # Extract parts of the connection string
+        prefix = database_url.split("://")[0] if "://" in database_url else ""
+        user_pwd = database_url.split("://")[1].split("@")[0] if "://" in database_url and "@" in database_url.split("://")[1] else ""
+        host_db = database_url.split("@")[1] if "@" in database_url else ""
+        
+        # Mask the password if user:pwd format is used
+        if ":" in user_pwd:
+            user = user_pwd.split(":")[0]
+            masked_url = f"{prefix}://{user}:********@{host_db}"
+        else:
+            masked_url = database_url
+    else:
+        masked_url = database_url
+    
+    st.info(f"**Database URL**: {masked_url}")
+    
+    # Environment variables
+    st.subheader("Environment Variables")
+    
+    # Display relevant environment variables (without showing sensitive values)
+    env_vars = {
+        "PGHOST": os.getenv("PGHOST", "Not set"),
+        "PGPORT": os.getenv("PGPORT", "Not set"),
+        "PGDATABASE": os.getenv("PGDATABASE", "Not set"),
+        "PGUSER": os.getenv("PGUSER", "Not set"),
+        "OPENROUTER_MODEL_ID": os.getenv("OPENROUTER_MODEL_ID", "Not set"),
+        "OPENROUTER_MODEL_NAME": os.getenv("OPENROUTER_MODEL_NAME", "Not set"),
+    }
+    
+    # Display as a table
+    env_df = pd.DataFrame(list(env_vars.items()), columns=["Variable", "Value"])
+    st.table(env_df)
+    
+    # System Information
+    st.subheader("System Information")
+    
+    # Display Python version and key packages
+    import sys
+    import platform
+    
+    system_info = {
+        "Python Version": platform.python_version(),
+        "Platform": platform.platform(),
+        "Streamlit Version": st.__version__,
+        "Pandas Version": pd.__version__,
+        "NumPy Version": np.__version__,
+    }
+    
+    # Display as a table
+    sys_df = pd.DataFrame(list(system_info.items()), columns=["Component", "Version"])
+    st.table(sys_df)

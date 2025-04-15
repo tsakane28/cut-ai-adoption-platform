@@ -56,17 +56,12 @@ if 'insights' not in st.session_state:
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Header with CUT branding
-st.markdown("""
-    <div class="header-container">
-        <img src="https://www.cut.ac.zw/images/logo.png" class="header-logo" alt="CUT Logo">
-        <div class="header-title">AI Adoption Analytics Platform</div>
-    </div>
-""", unsafe_allow_html=True)
+# Main title
+st.title("AI Adoption Analytics Platform")
 
 # Sidebar for navigation and filters
 with st.sidebar:
-    st.image("https://www.cut.ac.zw/images/logo.png", width=200)
+    st.image("https://images.unsplash.com/photo-1542744173-05336fcc7ad4", width=300)
     st.header("Navigation")
     
     page = st.radio(

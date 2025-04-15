@@ -295,6 +295,23 @@ elif page == "Insights & Suggestions":
                 """
                 insights = get_ai_insights(prompt)
                 st.session_state.insights = insights
+                
+                # Save insights to database
+                with st.spinner("Saving insights to database..."):
+                    if "Insights:" in insights and "Recommendations:" in insights:
+                        # Split into insights and recommendations
+                        insights_part = insights.split("Recommendations:")[0].replace("Insights:", "").strip()
+                        recommendations_part = insights.split("Recommendations:")[1].strip()
+                        
+                        # Generate a batch ID for this set of insights
+                        import uuid
+                        batch_id = str(uuid.uuid4())
+                        
+                        # Save insights
+                        save_insight_to_db(insights_part, category="insights", batch_id=batch_id)
+                        
+                        # Save recommendations
+                        save_insight_to_db(recommendations_part, category="recommendations", batch_id=batch_id)
         
         # Display insights
         insights = st.session_state.insights

@@ -1,0 +1,99 @@
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:13 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:14 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:14 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:14 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:14 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:14 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:15 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:15 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:15 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:15 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:15 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:18 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:18 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:18 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:18 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:18 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:22 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:22 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:22 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:22 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:22 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:26 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:26 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:26 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:26 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:26 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:33 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:33 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:33 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:33 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:33 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:16:47 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:16:47 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:16:47 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:16:47 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:47 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:17:13 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:17:13 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:17:13 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:17:13 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:17:13 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:18:05 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:18:05 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:18:05 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:18:05 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:18:05 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:19:06 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:19:06 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:19:06 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:19:06 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | PostgreSQL Database directory appears to contain a database; Skipping initialization
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.271 UTC [1] LOG:  starting PostgreSQL 14.17 (Debian 14.17-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.271 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.271 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.280 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.305 UTC [27] LOG:  database system was shut down at 2025-04-15 15:16:07 UTC
+2025-04-15 17:16:12 cut-ai-adoption-platform-db-1   | 2025-04-15 15:16:12.352 UTC [1] LOG:  database system is ready to accept connections
+2025-04-15 17:19:06 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:20:07 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:20:07 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:20:07 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:20:07 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:20:07 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:21:08 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:21:08 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:21:08 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:21:08 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:21:08 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:22:09 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:22:09 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:22:09 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:22:09 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:22:09 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:23:11 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:23:11 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:23:11 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:23:11 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:23:11 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:24:12 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:24:12 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:24:12 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:24:12 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:24:12 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'
+2025-04-15 17:25:13 cut-ai-adoption-platform-app-1  | Traceback (most recent call last):
+2025-04-15 17:25:13 cut-ai-adoption-platform-app-1  |   File "<string>", line 1, in <module>
+2025-04-15 17:25:13 cut-ai-adoption-platform-app-1  |   File "/app/database.py", line 2, in <module>
+2025-04-15 17:25:13 cut-ai-adoption-platform-app-1  |     import pandas as pd
+2025-04-15 17:25:13 cut-ai-adoption-platform-app-1  | ModuleNotFoundError: No module named 'pandas'

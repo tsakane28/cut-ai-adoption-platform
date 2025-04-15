@@ -1,15 +1,15 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import plotly.express as px
+from database import init_db
 import os
+from datetime import datetime
 import uuid
 from dotenv import load_dotenv
 from utils import preprocess_data, get_survey_stats
 from model import train_model, predict_adoption
 from openrouter_api import get_ai_insights, get_api_key, get_model_id, get_model_name
-
-# Load environment variables from .env file
-load_dotenv()
 from data_viz import (
     create_ai_familiarity_chart, 
     create_tool_usage_chart, 
@@ -19,7 +19,6 @@ from data_viz import (
     create_suggestion_wordcloud
 )
 from database import (
-    init_db,
     SessionLocal, 
     load_survey_data_to_db, 
     save_predictions_to_db,
@@ -29,34 +28,33 @@ from database import (
 )
 from loggers import get_logger
 
+# Load environment variables from .env file
+load_dotenv()
+
 # Set up logging
 logger = get_logger("app")
 
-# Ensure database is initialized
+# Initialize database
 init_db()
 
 # Set page config
 st.set_page_config(
-    page_title="CUT AI Adoption Analytics Platform",
+    page_title="CUT AI Adoption Analytics",
     page_icon="📊",
     layout="wide"
 )
 
-# Set up session state
-if 'data' not in st.session_state:
-    st.session_state.data = None
-if 'model' not in st.session_state:
-    st.session_state.model = None
-if 'predictions' not in st.session_state:
-    st.session_state.predictions = None
-if 'insights' not in st.session_state:
-    st.session_state.insights = None
+# Main navigation
+page = st.sidebar.selectbox(
+    "Navigation",
+    ["Home", "Data Upload", "Dashboard", "AI Predictions", "Insights & Suggestions", "Admin"]
+)
 
-# Main title
-st.title("CUT AI Adoption Analytics Platform")
+if page == "Home":
+    st.title("CUT AI Adoption Analytics Platform")
+    st.write("Welcome to the AI Adoption Analytics Platform.")
 
-# Sidebar for navigation and filters
-with st.sidebar:
+    # Add your existing home page content here
     st.image("https://images.unsplash.com/photo-1542744173-05336fcc7ad4", width=300)
     
     # Theme toggle
@@ -107,21 +105,14 @@ with st.sidebar:
             </style>
         """, unsafe_allow_html=True)
     
-    st.header("Navigation")
-    
-    page = st.radio(
-        "Go to",
-        ["Data Upload", "Dashboard", "AI Predictions", "Insights & Suggestions", "Admin"]
-    )
-    
     st.header("About")
     st.write("""
     This platform analyzes AI adoption at CUT based on survey data 
     and provides predictions and insights using AI models.
     """)
 
-# Data Upload Page
-if page == "Data Upload":
+
+elif page == "Data Upload":
     st.header("Upload Survey Data")
     st.write("Upload your CSV file containing the AI adoption survey responses.")
     
@@ -177,7 +168,6 @@ if page == "Data Upload":
         except Exception as e:
             st.error(f"Error processing file: {str(e)}")
 
-# Dashboard Page
 elif page == "Dashboard":
     st.header("AI Adoption Dashboard")
     
@@ -257,7 +247,6 @@ elif page == "Dashboard":
             with tab4:
                 st.plotly_chart(create_challenges_chart(filtered_data), use_container_width=True)
 
-# AI Predictions Page
 elif page == "AI Predictions":
     st.header("AI Adoption Predictions")
     st.image("https://images.unsplash.com/photo-1556155092-490a1ba16284", width=700)
@@ -330,7 +319,6 @@ elif page == "AI Predictions":
                 "75%"
             )
 
-# Insights & Suggestions Page
 elif page == "Insights & Suggestions":
     st.header("AI-Generated Insights & Suggestions")
     st.image("https://images.unsplash.com/photo-1655393001768-d946c97d6fd1", width=700)
@@ -367,7 +355,6 @@ elif page == "Insights & Suggestions":
                         recommendations_part = insights.split("Recommendations:")[1].strip()
                         
                         # Generate a batch ID for this set of insights
-                        import uuid
                         batch_id = str(uuid.uuid4())
                         
                         # Save insights
@@ -425,7 +412,6 @@ elif page == "Insights & Suggestions":
         else:
             st.error("Failed to generate proper insights format. Please try again.")
 
-# Admin Page
 elif page == "Admin":
     st.header("Administrator Settings")
     

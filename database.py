@@ -106,14 +106,16 @@ def load_survey_data_to_db(df, db_session=None):
         db_session: SQLAlchemy session (optional)
         
     Returns:
-        int: Number of records added
+        tuple: (added_count, skipped_count, skipped_emails)
     """
     close_session = False
     if db_session is None:
         db_session = SessionLocal()
         close_session = True
     
-    count = 0
+    added_count = 0
+    skipped_count = 0
+    skipped_emails = []
     
     try:
         # Convert DataFrame to database records
@@ -121,6 +123,8 @@ def load_survey_data_to_db(df, db_session=None):
             # Check if email already exists
             existing = db_session.query(Survey).filter_by(email=row['1. Email']).first()
             if existing:
+                skipped_count += 1
+                skipped_emails.append(row['1. Email'])
                 continue
                 
             survey = Survey(
@@ -140,7 +144,7 @@ def load_survey_data_to_db(df, db_session=None):
             )
             
             db_session.add(survey)
-            count += 1
+            added_count += 1
             
         db_session.commit()
     except Exception as e:
@@ -150,7 +154,7 @@ def load_survey_data_to_db(df, db_session=None):
         if close_session:
             db_session.close()
     
-    return count
+    return added_count, skipped_count, skipped_emails
 
 
 def save_predictions_to_db(data, predictions, model_version="v1.0", db_session=None):

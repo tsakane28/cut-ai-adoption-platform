@@ -98,11 +98,13 @@ if page == "Data Upload":
                 
                 # Save to database
                 with st.spinner("Saving data to database..."):
-                    records_added = load_survey_data_to_db(processed_data)
-                    if records_added > 0:
-                        st.success(f"Data successfully uploaded and {records_added} new records saved to database!")
-                    else:
-                        st.info("Data processed, but no new records were added to the database.")
+                    added, skipped, skipped_emails = load_survey_data_to_db(processed_data)
+                    if added > 0:
+                        st.success(f"Data successfully uploaded! Added {added} new records.")
+                    if skipped > 0:
+                        st.info(f"Skipped {skipped} existing records to avoid duplicates.")
+                        if st.checkbox("Show skipped emails"):
+                            st.write("Skipped emails:", skipped_emails)
                 
                 # Show statistics
                 stats = get_survey_stats(processed_data)

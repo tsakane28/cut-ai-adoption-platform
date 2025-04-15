@@ -58,65 +58,6 @@ st.title("CUT AI Adoption Analytics Platform")
 # Sidebar for navigation and filters
 with st.sidebar:
     st.image("https://images.unsplash.com/photo-1542744173-05336fcc7ad4", width=300)
-    
-    # Theme toggle
-    theme = st.toggle("Dark Mode", key="dark_mode")
-    st.markdown("""
-        <style>
-            [data-testid="stSidebar"] {
-                background-color: var(--sidebar-background);
-            }
-            [data-testid="stSidebarNav"] {
-                background-color: var(--sidebar-background);
-            }
-            [data-testid="stSidebarNav"] a {
-                color: var(--text-color) !important;
-            }
-            .st-emotion-cache-pkbazv {
-                color: var(--text-color) !important;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    # Change theme based on toggle
-    if theme:
-        st.markdown("""
-            <style>
-                :root {
-                    --primary-color: #2D5AF0;
-                    --background-color: #0E1117;
-                    --sidebar-background: #1E1E1E;
-                    --text-color: #FFFFFF;
-                }
-                .stApp {
-                    background-color: var(--background-color);
-                    color: var(--text-color);
-                }
-                .stButton>button {
-                    color: var(--text-color);
-                    background-color: var(--primary-color);
-                }
-            </style>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-            <style>
-                :root {
-                    --primary-color: #2D5AF0;
-                    --background-color: #FFFFFF;
-                    --text-color: #1A1A1A;
-                }
-                .stApp {
-                    background-color: var(--background-color);
-                    color: var(--text-color);
-                }
-                .stButton>button {
-                    color: white;
-                    background-color: var(--primary-color);
-                }
-            </style>
-        """, unsafe_allow_html=True)
-    
     st.header("Navigation")
     
     page = st.radio(

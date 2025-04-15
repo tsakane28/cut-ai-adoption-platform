@@ -13,6 +13,15 @@ from data_viz import (
     create_adoption_prediction_chart,
     create_suggestion_wordcloud
 )
+from database import (
+    init_db,
+    SessionLocal, 
+    load_survey_data_to_db, 
+    save_predictions_to_db,
+    save_insight_to_db,
+    get_surveys_from_db,
+    surveys_to_dataframe
+)
 
 # Set page config
 st.set_page_config(
@@ -75,8 +84,13 @@ if page == "Data Upload":
                 processed_data = preprocess_data(data)
                 st.session_state.data = processed_data
                 
-                # Display success message
-                st.success("Data successfully uploaded and processed!")
+                # Save to database
+                with st.spinner("Saving data to database..."):
+                    records_added = load_survey_data_to_db(processed_data)
+                    if records_added > 0:
+                        st.success(f"Data successfully uploaded and {records_added} new records saved to database!")
+                    else:
+                        st.info("Data processed, but no new records were added to the database.")
                 
                 # Show statistics
                 stats = get_survey_stats(processed_data)
@@ -197,6 +211,11 @@ elif page == "AI Predictions":
             with st.spinner("Generating predictions..."):
                 predictions = predict_adoption(st.session_state.model, data)
                 st.session_state.predictions = predictions
+                
+                # Save predictions to database
+                with st.spinner("Saving predictions to database..."):
+                    saved_count = save_predictions_to_db(data, predictions)
+                    st.success(f"Saved {saved_count} predictions to database.")
         
         # Display prediction results
         st.subheader("Prediction Results")

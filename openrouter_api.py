@@ -20,15 +20,16 @@ def get_api_key():
         str: API key or None if not found
     """
     # Try to get from environment variables
-    api_key = os.getenv("OPENROUTER_API_KEY", DEFAULT_API_KEY)
+    api_key = os.getenv("OPENROUTER_API_KEY")
     
-    if not api_key:
+    if not api_key or api_key.strip() == "":
         logger.warning("OpenRouter API key not found in environment variables")
-        st.error("OpenRouter API key not configured. Please set the OPENROUTER_API_KEY environment variable in Replit Secrets.")
+        st.error("OpenRouter API key not configured. Please add OPENROUTER_API_KEY to Replit Secrets with your API key.")
+        st.info("To add your API key:\n1. Click Tools in the left sidebar\n2. Select Secrets\n3. Add new secret with key 'OPENROUTER_API_KEY'\n4. Paste your OpenRouter API key as the value")
         return None
     
     logger.info("Successfully loaded OpenRouter API key")
-    return api_key
+    return api_key.strip()
 
 def get_model_id():
     """

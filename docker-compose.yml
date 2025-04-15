@@ -14,9 +14,20 @@ services:
       - PGDATABASE=cutai
       - PGHOST=db
       - PGPORT=5432
+      # Add OpenRouter API key environment variable (to be set by user)
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
     volumes:
       - ./:/app
+      - ./data:/app/data
+      - ./logs:/app/logs
     restart: always
+    command: > 
+      bash -c "
+        echo 'Waiting for database to be ready...' &&
+        sleep 5 &&
+        python -c 'from database import init_db; init_db()' &&
+        streamlit run app.py --server.port=5000 --server.address=0.0.0.0
+      "
 
   db:
     image: postgres:14
@@ -29,6 +40,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:

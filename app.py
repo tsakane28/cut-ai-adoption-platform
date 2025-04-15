@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import uuid
 from utils import preprocess_data, get_survey_stats
 from model import train_model, predict_adoption
 from openrouter_api import get_ai_insights
@@ -22,6 +23,13 @@ from database import (
     get_surveys_from_db,
     surveys_to_dataframe
 )
+from loggers import get_logger
+
+# Set up logging
+logger = get_logger("app")
+
+# Ensure database is initialized
+init_db()
 
 # Set page config
 st.set_page_config(

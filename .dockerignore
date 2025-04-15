@@ -1,0 +1,52 @@
+# Docker specific
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environment
+venv/
+ENV/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Large files and temp files
+*.csv
+*.zip
+app_download.zip
+/tmp
+/temp
+
+# Keep survey data CSV file (needed for app)
+!cut_ai_survey_1224_responses.csv

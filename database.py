@@ -4,9 +4,14 @@ import sqlalchemy
 from sqlalchemy import create_engine, Column, Integer, String, Float, Text, Boolean, ForeignKey, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+from loggers import get_logger
+
+# Set up logger
+logger = get_logger("database")
 
 # Get database URL from environment variable
 DATABASE_URL = os.getenv('DATABASE_URL')
+logger.info(f"Connecting to database at {DATABASE_URL.split('@')[1] if '@' in DATABASE_URL else 'DATABASE_URL'}")
 
 # Create engine
 engine = create_engine(DATABASE_URL)

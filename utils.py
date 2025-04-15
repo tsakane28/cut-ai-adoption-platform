@@ -24,9 +24,6 @@ def preprocess_data(data):
         "10. Improves learning?": "No"
     })
     
-    # Ensure used_ai_tools column exists and is populated from "5. Used AI tools"
-    df["used_ai_tools"] = df["5. Used AI tools"]
-    
     # Convert usage frequency to numeric
     df["7. Usage frequency"] = pd.to_numeric(df["7. Usage frequency"], errors="coerce").fillna(1)
     

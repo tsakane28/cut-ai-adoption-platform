@@ -8,7 +8,7 @@ from loggers import get_logger
 logger = get_logger("openrouter_api")
 
 # Default OpenRouter configuration
-DEFAULT_API_KEY = "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"
+DEFAULT_API_KEY = None
 DEFAULT_MODEL_ID = "deepseek/deepseek-r1-distill-qwen-32b:free"
 DEFAULT_MODEL_NAME = "DeepSeek R1 Distill Qwen 32B"
 
@@ -20,15 +20,16 @@ def get_api_key():
         str: API key or None if not found
     """
     # Try to get from environment variables
-    api_key = os.getenv("OPENROUTER_API_KEY", DEFAULT_API_KEY)
+    api_key = os.getenv("OPENROUTER_API_KEY")
     
-    if not api_key:
+    if not api_key or api_key.strip() == "":
         logger.warning("OpenRouter API key not found in environment variables")
-        st.warning("OpenRouter API key not found in environment variables. Using mock data for demonstration.")
+        st.error("OpenRouter API key not configured. Please add OPENROUTER_API_KEY to Replit Secrets with your API key.")
+        st.info("To add your API key:\n1. Click Tools in the left sidebar\n2. Select Secrets\n3. Add new secret with key 'OPENROUTER_API_KEY'\n4. Paste your OpenRouter API key as the value")
         return None
     
     logger.info("Successfully loaded OpenRouter API key")
-    return api_key
+    return api_key.strip()
 
 def get_model_id():
     """
@@ -77,13 +78,15 @@ def get_ai_insights(prompt):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",  # Replace with your site URL
-        "X-Title": "CUT AI Adoption Analytics Platform"
+        "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",
+        "X-Title": "CUT AI Adoption Analytics Platform",
+        "OpenAI-Beta": "assistants=v1"
     }
     
     # Request body
     data = {
         "model": model_id,
+        "route": "fallback",
         "messages": [
             {
                 "role": "system",
@@ -95,7 +98,11 @@ def get_ai_insights(prompt):
             }
         ],
         "temperature": 0.7,
-        "max_tokens": 1000
+        "max_tokens": 1000,
+        "headers": {
+            "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",
+            "X-Title": "CUT AI Adoption Analytics Platform"
+        }
     }
     
     try:

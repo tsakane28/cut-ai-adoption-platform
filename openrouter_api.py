@@ -77,13 +77,15 @@ def get_ai_insights(prompt):
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",  # Replace with your site URL
-        "X-Title": "CUT AI Adoption Analytics Platform"
+        "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",
+        "X-Title": "CUT AI Adoption Analytics Platform",
+        "OpenAI-Beta": "assistants=v1"
     }
     
     # Request body
     data = {
         "model": model_id,
+        "route": "fallback",
         "messages": [
             {
                 "role": "system",
@@ -95,7 +97,11 @@ def get_ai_insights(prompt):
             }
         ],
         "temperature": 0.7,
-        "max_tokens": 1000
+        "max_tokens": 1000,
+        "headers": {
+            "HTTP-Referer": "https://ccut-ai-adoption-platform.replit.app",
+            "X-Title": "CUT AI Adoption Analytics Platform"
+        }
     }
     
     try:

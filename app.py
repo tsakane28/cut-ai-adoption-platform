@@ -64,7 +64,16 @@ with st.sidebar:
     st.markdown("""
         <style>
             [data-testid="stSidebar"] {
-                background-color: var(--background-color);
+                background-color: var(--sidebar-background);
+            }
+            [data-testid="stSidebarNav"] {
+                background-color: var(--sidebar-background);
+            }
+            [data-testid="stSidebarNav"] a {
+                color: var(--text-color) !important;
+            }
+            .st-emotion-cache-pkbazv {
+                color: var(--text-color) !important;
             }
         </style>
     """, unsafe_allow_html=True)
@@ -76,7 +85,8 @@ with st.sidebar:
                 :root {
                     --primary-color: #2D5AF0;
                     --background-color: #0E1117;
-                    --text-color: #FAFAFA;
+                    --sidebar-background: #1E1E1E;
+                    --text-color: #FFFFFF;
                 }
                 .stApp {
                     background-color: var(--background-color);

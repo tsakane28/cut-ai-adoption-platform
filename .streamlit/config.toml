@@ -8,3 +8,9 @@ primaryColor = "#2D5AF0"
 backgroundColor = "#FFFFFF"
 textColor = "#1A1A1A"
 font = "sans serif"
+[theme]
+primaryColor = "#A71930"  # CUT burgundy
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"

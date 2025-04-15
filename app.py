@@ -52,12 +52,21 @@ if 'predictions' not in st.session_state:
 if 'insights' not in st.session_state:
     st.session_state.insights = None
 
-# Main title
-st.title("CUT AI Adoption Analytics Platform")
+# Load custom CSS
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Header with CUT branding
+st.markdown("""
+    <div class="header-container">
+        <img src="https://www.cut.ac.zw/images/logo.png" class="header-logo" alt="CUT Logo">
+        <div class="header-title">AI Adoption Analytics Platform</div>
+    </div>
+""", unsafe_allow_html=True)
 
 # Sidebar for navigation and filters
 with st.sidebar:
-    st.image("https://images.unsplash.com/photo-1542744173-05336fcc7ad4", width=300)
+    st.image("https://www.cut.ac.zw/images/logo.png", width=200)
     st.header("Navigation")
     
     page = st.radio(
